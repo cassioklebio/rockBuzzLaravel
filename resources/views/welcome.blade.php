@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
 
@@ -61,6 +61,7 @@
 
             <div id="app" class=".mt-6">
                 <br>
+                <navs></navs>
                 <posts></posts>
                 <hr>
                 <footers></footers>

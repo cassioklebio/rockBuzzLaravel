@@ -11,6 +11,8 @@
 |
 */
 
+use App\Http\Controllers\TagController;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -18,10 +20,14 @@ Route::get('/', function () {
 
 Auth::routes();
 
+
+
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/posts', 'PostsController@listar');
+Route::get('/posts', 'PostsController@index');
 Route::get('/posts/create', 'PostsController@criar');
 Route::post('/posts/store', 'PostsController@salvar');
 Route::get('/posts/edit/{id}', 'PostsController@editar');
 Route::post('/posts/update/{id}', 'PostsController@atualizar');
 Route::get('/posts/destroy/{id}', 'PostsController@deletar');
+
+Route::get('/tags', 'TagController@index');

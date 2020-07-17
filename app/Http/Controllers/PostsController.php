@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
+use App\Http\Requests\PostRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -18,11 +20,14 @@ class PostsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function listar()
+    public function index()
     {
-        $posts = \App\Post::all();
-
-        return view('posts.index', ['posts' => $posts]);
+        $listaBreadCrumb = json_encode([
+            ["titulo" => "Home", "url" => route('home')],
+            ["titulo" => "Lista de Post", "url" => ""]
+        ]);
+        $posts = Post::all();
+        return view('posts.index', compact('posts', 'listaBreadCrumb'));
     }
 
     /**
@@ -32,7 +37,12 @@ class PostsController extends Controller
      */
     public function criar()
     {
-        return view('posts.create');
+        $listaBreadCrumb = json_encode([
+            ["titulo" => "Home", "url" => route('home')],
+            ["titulo" => "post", "url" => ""],
+
+        ]);
+        return view('posts.create', compact('listaBreadCrumb'));
     }
 
     /**
@@ -41,19 +51,17 @@ class PostsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function salvar(Request $request)
+    public function salvar(PostRequest $request)
     {
-        $this->validate($request, [
-            'title' => 'required',
-            'body' => 'required'
-        ]);
 
-        \App\Post::create([
+
+        Post::create([
             'title' => $request->title,
             'body' => $request->body,
+
         ]);
 
-        $post = \App\Post::where('title', $request->title)->get();
+        $post = Post::where('title', $request->title)->get();
 
         foreach ($request->tags as $tag) {
             DB::table('tag_post')->insert([
@@ -73,7 +81,7 @@ class PostsController extends Controller
      */
     public function editar($id)
     {
-        $post = \App\Post::find($id);
+        $post = Post::find($id);
 
         return view('posts.edit', ['post' => $post]);
     }
@@ -92,7 +100,7 @@ class PostsController extends Controller
             'body' => 'required'
         ]);
 
-        $post = \App\Post::find($id);
+        $post = Post::find($id);
 
         $post->update([
             'title' => $request->title,
@@ -119,7 +127,7 @@ class PostsController extends Controller
      */
     public function deletar($id)
     {
-        $post = \App\Post::find($id);
+        $post = Post::find($id);
 
         $post->delete();
 

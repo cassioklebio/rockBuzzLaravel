@@ -26,7 +26,7 @@
       </div>
     </div>
 
-    <div v-for="post in posts" class="row">
+    <div v-for="post in posts" :key="post.message" class="row">
       <div class="col-md-12">
         <div
           class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative"
@@ -39,7 +39,7 @@
             </h3>
             <div class="mb-1 text-muted">
               <font style="vertical-align: inherit;">
-                <font style="vertical-align: inherit;">{{post.times}}</font>
+                <font style="vertical-align: inherit;">{{post.timestamps}}</font>
               </font>
             </div>
             <p class="text-left card-text mb-auto">{{post.body}}</p>

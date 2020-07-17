@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config( 'Rockbuzz - Teste Full Stack Laravel') }}</title>
+     <title>{{ config( 'Rockbuzz - Teste Full Stack Laravel') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -21,8 +21,8 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
-            <div class="container">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark navbar-laravel">
+
                 <a class="navbar-brand" href="{{ url('/') }}">
                     Rockbuzz Teste Full Stack Laravel
                 </a>
@@ -75,7 +75,7 @@
                         @endguest
                     </ul>
                 </div>
-            </div>
+
         </nav>
 
         <main class="py-4">

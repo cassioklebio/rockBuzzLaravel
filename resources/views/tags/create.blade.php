@@ -2,7 +2,6 @@
 
 @section('content')
     <div class="container">
-        <breadcrumb v-bind:lista="{{$listaBreadCrumb}}"></breadcrumb>
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
@@ -29,7 +28,19 @@
                                     </span>
                                 @endif
                             </div>
-
+                            <div class="form-group has-feedback{{ $errors->has('title') ? ' has-error' : '' }}">
+                                <label for="tags" class="text-muted">Tags</label>
+                                <select id="tags" type="text" name="tags[]" multiple class="form-control">
+                                    @foreach(\App\Tag::all() as $tag)
+                                        <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                                    @endforeach
+                                </select>
+                                @if ($errors->has('tags'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('tags') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
                             <button type="submit" class="btn btn-primary">store</button>
                         </form>
 
